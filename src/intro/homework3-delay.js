@@ -20,13 +20,11 @@
 //    }, 3000);
 // });
 
-
 // Implements the task's technical requirements.
 
 const delay = (time) => new Promise((resolve) => {
     setTimeout(() => resolve(`Promise resolved after ${time / 1000} seconds`), time);
 });
-
 
 // delay(3000).then((result) => console.log(result));
 // delay(2000).then((result) => console.log(result));
