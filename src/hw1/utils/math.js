@@ -27,7 +27,6 @@ function calculateSumRecursiveCore(array) {
 
 function callculateArraySummByOpperators(array) {
   console.log("[Info] Strategy: Flat Operators → Using flat + filter + reduce for summ");
-
   return array.flat(Infinity).filter((it) => isNumber(it)).reduce((acum, it) => acum + it)
 }
 
