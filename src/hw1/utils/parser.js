@@ -49,7 +49,8 @@ function deserializeArrayRecursiveCore(characters, cursor = 0) {
       cursor = nestedResult.cursor;
     } else if (cursorChar === BRACKET_CLOSE) {
       // End of current nested array; return parsed array and current cursor +1 for skip close bracket for parrent 
-      return { cursor: cursor + 1, array: result };
+      cursor++;
+      return { cursor: cursor, array: result };
     } else if (cursorChar === COMMA_SEPARATOR) {
       // Skip comma
       cursor++;
@@ -73,7 +74,7 @@ function deserializeArrayRecursiveCore(characters, cursor = 0) {
       // Push the parsed number into the current array
       result.push(parseInt(candidateNumber));
       // Update cursor to continue parsing after the number
-      cursor = lastSuccessCursor + 1;
+      cursor = lastSuccessCursor;
     }
   }
 
