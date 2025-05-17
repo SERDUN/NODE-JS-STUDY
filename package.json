@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SERDUN/NODE-JS-STUDY/issues"
   },
-  "homepage": "https://github.com/SERDUN/NODE-JS-STUDY#readme"
+  "homepage": "https://github.com/SERDUN/NODE-JS-STUDY#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
