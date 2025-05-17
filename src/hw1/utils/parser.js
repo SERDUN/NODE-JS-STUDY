@@ -3,15 +3,24 @@ const BRACKET_OPEN = '[';
 const BRACKET_CLOSE = ']';
 const COMMA_SEPARATOR = ',';
 
-export function deserializeArray(array) {
-  return deserializeNestedArrayByRecursive(array);
+let currentStrategy = deserializeArrayRecursive;
+
+function setDeserializationStrategy(strategy) {
+  currentStrategy = strategy;
+}
+
+function deserializeArray(array) {
+  return currentStrategy(array);
 }
 
 function deserializeArrayByJSON(array) {
+  console.log("[Info] Strategy: JSON → Parsing input as JSON string");
   return JSON.parse(array);
 }
 
-function deserializeNestedArrayByRecursive(input) {
+function deserializeArrayRecursive(input) {
+  console.log("[Info] Strategy: Recursive → Parsing nested array manually");
+
   const trimmedInput = removeSpacesFromInput(input);
   const characters = [...trimmedInput];
 
@@ -19,11 +28,11 @@ function deserializeNestedArrayByRecursive(input) {
   const inputCharacters = characters.slice(1, characters.length - 1);
 
   // Recursively parse the inner content into a nested array
-  const result = deserializeArrayRecursive(inputCharacters);
+  const result = deserializeArrayRecursiveCore(inputCharacters);
   return result.array;
 }
 
-function deserializeArrayRecursive(characters, cursor = 0) {
+function deserializeArrayRecursiveCore(characters, cursor = 0) {
   const result = [];
   while (cursor < characters.length) {
     const cursorChar = characters[cursor];
@@ -33,7 +42,7 @@ function deserializeArrayRecursive(characters, cursor = 0) {
       // Skip the opening bracket for the recursive call
       cursor++;
       // Call recursively to parse the sub-array starting from the current cursor
-      const nestedResult = deserializeArrayRecursive(characters, cursor);
+      const nestedResult = deserializeArrayRecursiveCore(characters, cursor);
       // The recursive call returns the parsed sub-array and the cursor after the closing bracket
       result.push(nestedResult.array);
       // Update the cursor in the parent context
@@ -81,4 +90,7 @@ function isNumeric(str) {
 
 export default {
   deserializeArray,
+  setDeserializationStrategy,
+  deserializeArrayByJSON,
+  deserializeNestedArrayByRecursive: deserializeArrayRecursive,
 };
