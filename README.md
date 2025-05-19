@@ -14,6 +14,10 @@ This project is part of a course on the basics of Node.js. It includes practical
 
 [Link to Homework 1](./doc/hw_1.md)
 
+## Homework Assignment 2
+
+[Link to Homework 2](./doc/hw_2.md)
+
 ## Running Tests
 
 To run tests for this project, Jest is used with ECMAScript Module (ESM) support.
