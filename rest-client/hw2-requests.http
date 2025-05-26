@@ -1,0 +1,41 @@
+### Get all ideas
+# Returns the full list of all submitted ideas
+GET http://localhost:8080/api/ideas
+
+### Create a new idea
+# Submits a new idea with title and description
+POST http://localhost:8080/api/ideas
+Content-Type: application/json
+
+{
+  "title": "Test title",
+  "description": "Test description"
+}
+
+### Partially update an idea
+# Updates specific fields of an existing idea by ID
+PATCH http://localhost:8080/api/ideas/0
+Content-Type: application/json
+
+{
+  "title": "Updated title",
+  "description": "Updated description"
+}
+
+### Get idea by ID
+# Retrieves the idea matching the specified ID
+GET http://localhost:8080/api/ideas/0
+
+### Replace an existing idea
+# Replaces the entire idea with new data by ID
+PUT http://localhost:8080/api/ideas/0
+Content-Type: application/json
+
+{
+  "title": "New title",
+  "description": "New description"
+}
+
+### Delete an idea
+# Deletes the idea with the specified ID
+DELETE http://localhost:8080/api/ideas/0
