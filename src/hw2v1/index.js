@@ -1,17 +1,29 @@
-import {createUser, deleteUserById, getUserById, getUsers, updateUserById} from "./services/users.service.js";
+import http from "node:http";
+import {dispatch} from "./utils/router.js";
 
-const users = getUsers();
-console.log(users);
+//
+// const users = getUsers();
+// console.log(users);
+//
+//
+// const createUsers = createUser({"id": "3", "name": "Creat"});
+// console.log(createUsers);
+//
+// const userById = getUserById("1");
+// console.log(userById);
+//
+// const updatedUser = updateUserById({"id": "1", "name": "Update"});
+// console.log(updatedUser);
+//
+// const deleteUser = deleteUserById("1");
+// console.log(deleteUser);
 
 
-const createUsers = createUser({"id": "3", "name": "Creat"});
-console.log(createUsers);
+const hostname = '127.0.0.1';
+const port = 3000;
 
-const userById = getUserById("1");
-console.log(userById);
+const server = http.createServer(dispatch);
 
-const updatedUser = updateUserById({"id": "1", "name": "Update"});
-console.log(updatedUser);
-
-const deleteUser = deleteUserById("1");
-console.log(deleteUser);
+server.listen(port, hostname, () => {
+	console.log(`Server running at http://${hostname}:${port}/`);
+});
