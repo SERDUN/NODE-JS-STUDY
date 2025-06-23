@@ -26,3 +26,7 @@ export function findProjectRoot(startDir = __dirname) {
 export function getRootDirPath(dir) {
     return resolve(findProjectRoot(), dir);
 }
+
+export function getRoutePath(dir = '') {
+    return resolve(getRootDirPath('src/hw2v1/routes'), dir);
+}
