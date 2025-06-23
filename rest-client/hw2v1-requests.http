@@ -40,3 +40,32 @@ GET http://localhost:3000/users/99
 Accept: application/json
 
 ###
+
+### Get all tasks
+
+GET http://localhost:3000/users/tasks
+Accept: text/plain
+
+### Get task by ID
+
+GET http://localhost:3000/users/tasks/42
+Accept: text/plain
+
+### Create task by ID
+
+POST http://localhost:3000/users/tasks/42
+Content-Type: text/plain
+
+### Update task by ID
+
+PUT http://localhost:3000/users/tasks/42
+Content-Type: text/plain
+
+### Delete task by ID
+
+DELETE http://localhost:3000/users/tasks/42
+
+### Patch task by ID
+
+PATCH http://localhost:3000/users/tasks/42
+Content-Type: text/plain

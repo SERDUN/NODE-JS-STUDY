@@ -1,37 +1,29 @@
-import {deleteUserById, getUserById, updateUserById} from "../../../../services/index.js";
-
-export async function get(req, res) {
-	const id = Number(req.params.id);
-	const user = getUserById(id);
-
-	res.writeHead(200, {'Content-Type': 'application/json'});
-	res.end(JSON.stringify(user));
+export function get(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end(`GET: You asked for task ${req.params.resourceId}, but I got distracted organizing my other tasks... alphabetically.`);
 }
 
-export async function put(req, res) {
-	const id = Number(req.params.id);
-	let body = '';
-
-	try {
-		const data = JSON.parse(body);
-		const updatedUsers = updateUserById(id, {id, name: data.name});
-		res.writeHead(200, {'Content-Type': 'application/json'});
-		res.end(JSON.stringify(updatedUsers));
-	} catch (err) {
-		res.writeHead(400, {'Content-Type': 'application/json'});
-		res.end(JSON.stringify({error: 'Invalid JSON'}));
-	}
+export function post(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end(`POST: Creating task ${req.params.resourceId}? Absolutely! Right after I finish my task of avoiding tasks.`);
 }
 
-export async function delete_(req, res) {
-	const id = Number(req.params.id);
+export function put(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end(`PUT: I tried to update task ${req.params.resourceId}, but my motivation file was not found.`);
+}
 
-	try {
-		deleteUserById(id);
-		res.writeHead(204);
-		res.end();
-	} catch (err) {
-		res.writeHead(500, {'Content-Type': 'application/json'});
-		res.end(JSON.stringify({error: 'Server error'}));
-	}
+export function delete_(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end(`DELETE: Tried to delete task ${req.params.resourceId}, but it ghosted me first.`);
+}
+
+export function patch(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end(`PATCH: Small edits to task ${req.params.resourceId} were planned. Then I took a "small" break.`);
 }
