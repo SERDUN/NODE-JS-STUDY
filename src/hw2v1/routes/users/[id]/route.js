@@ -3,9 +3,14 @@ import {
 } from '../../../services/index.js';
 
 export function get(req, res) {
-	const user = getUserById(Number(req.params.resourceId));
-	res.writeHead(200, {'Content-Type': 'application/json'});
-	res.end(JSON.stringify(user));
+	try {
+		const user = getUserById(Number(req.params.resourceId));
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end(JSON.stringify(user));
+	} catch (r) {
+		res.writeHead(404, {'Content-Type': 'application/json'});
+		res.end(JSON.stringify({error: 'User not found'}));
+	}
 }
 
 export async function put(req, res) {

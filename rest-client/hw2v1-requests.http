@@ -40,21 +40,3 @@ GET http://localhost:3000/users/99
 Accept: application/json
 
 ###
-
-### Invalid method (should return 405)
-PATCH http://localhost:3000/users/1
-Content-Type: application/json
-
-{
-  "name": "Invalid"
-}
-
-###
-
-### Invalid payload (missing name)
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-  "age": 30
-}

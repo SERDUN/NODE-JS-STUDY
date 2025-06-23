@@ -14,7 +14,11 @@ export function createUser(user) {
 
 export function getUserById(id) {
 	const users = getUsers();
-	return users.find(user => user.id === id);
+	const user = users.find(user => user.id === id);
+	if (!user) {
+		throw new Error("User not found");
+	}
+	return user;
 }
 
 export function updateUserById(id, newUser) {
