@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/hw2/main.js",
     "dev": "nodemon src/hw2/main.js",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+    "test": "node --test --test-reporter=spec --test-concurrency=1"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/SERDUN/NODE-JS-STUDY#readme",
   "devDependencies": {
-    "jest": "^29.7.0",
     "nodemon": "^3.1.10"
   }
 }
