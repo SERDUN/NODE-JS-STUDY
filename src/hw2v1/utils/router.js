@@ -52,20 +52,34 @@ export async function dispatch(route, request, response) {
 	}
 }
 
+// WARNING: Work only fot one level of dynamic segments (e.g. /users/:id), for current tasks should be enough.
 function matchRoute(route, path) {
-	for (const routePath in route) {
-		console.log(`Route path: ${route[routePath]}`);
-		const routeSegment = route[routePath].urlPattern.split('/').filter(Boolean);
-		if (routeSegment.length !== path.length) continue;
-		let id = null;
-		const isMatch = routeSegment.every((segment, index) => {
-			if (segment.startsWith(':')) {
-				id = path[index];
-				return true;
-			}
-			return segment === path[index];
-		});
+	let bestMatch = null;
 
-		if (isMatch) return {"routePath": route[routePath].filePath, id: id}; else null;
+	for (const routeKey in route) {
+		const {urlPattern, filePath} = route[routeKey];
+		const routeSegment = urlPattern.split('/').filter(Boolean);
+		if (routeSegment.length !== path.length) continue;
+
+		let id = null;
+		let isMatch = true;
+
+		for (let i = 0; i < routeSegment.length; i++) {
+			const segment = routeSegment[i];
+			if (segment.startsWith(':')) {
+				id = path[i];
+			} else if (segment !== path[i]) {
+				isMatch = false;
+				break;
+			}
+		}
+
+		if (isMatch) {
+			bestMatch = {routePath: filePath, id};
+			// If this is no dynamic segments, stop searching — it's the best match :)
+			if (!urlPattern.includes(':')) break;
+		}
 	}
+
+	return bestMatch || {routePath: null, id: null};
 }
